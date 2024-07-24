@@ -132,6 +132,7 @@ const VideoCarousel = () => {
       case "video-reset":
         setVideo((prevVideo) => ({
           ...prevVideo,
+          videoId:0,
           isLastVideo: false,
         }));
         break;
@@ -174,20 +175,21 @@ const VideoCarousel = () => {
                       ? handleProcess('video-end', i)
                       : handleProcess('video-last') 
                   }
-                  onPlay={() => {
+                  onPlay={() => 
                     setVideo((prevVideo) => ({
                       ...prevVideo,
-                      isPlaying: true,
-                    }));
-                  }}
+                      isPlaying: true
+                    }))
+                  }
                   onLoadedMetadata={(e) => handleLoadedMetadata(i, e)}
                 >
                   <source src={list.video} type="video/mp4" />
                 </video>
               </div>
+
               <div className="absolute top-12 left-[5%] z-10">
-                {list.textLists.map((text) => (
-                  <p key={text} className="md:text-2xl text-xl font-medium">
+                {list.textLists.map((text,i) => (
+                  <p key={i} className="md:text-2xl text-xl font-medium">
                     {text}
                   </p>
                 ))}
